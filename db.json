@@ -1,0 +1,40 @@
+{
+  "contactData": [
+    {
+      "id": "1",
+      "fname": "Irfan",
+      "lname": "uddin",
+      "email": "irfan@gmail.com",
+      "phone": "345566673"
+    },
+    {
+      "id": "2",
+      "fname": "Rafi",
+      "lname": "Choudhury",
+      "email": "rafi@gmail.com",
+      "phone": "32166468"
+    },
+    {
+      "id": "3",
+      "fname": "Hablu",
+      "lname": "Jabin",
+      "email": "hablu@gmail.com",
+      "phone": "524895663"
+    },
+    {
+      "id": "4",
+      "fname": "Kalu",
+      "lname": "Labil",
+      "email": "kalu@gmail.com",
+      "phone": "0254958771"
+    },
+    {
+      "id": "5",
+      "fname": "Jakhan",
+      "lname": "Shakik",
+      "email": "jakhan@gmail.com",
+      "phone": "325418575"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

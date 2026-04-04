@@ -1,0 +1,9 @@
+.fs-2 {
+  font-size: 25px;
+}
+
+.form-select {
+  width: 20% !important;
+  padding: 3px 15px;
+  border: 2px solid green;
+}
