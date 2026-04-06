@@ -1,3 +1,5 @@
+import generateNextId from "../utilities/generateNextId";
+
 const contactPageReducer = (state, action) => {
   switch (action.type) {
     case "FETCH_DATA": {
@@ -41,7 +43,11 @@ const contactPageReducer = (state, action) => {
       };
     }
 
-    case "contactRemoveHandler": {
+    case "SUBMIT_HANDLER": {
+      return {
+        ...state,
+        posts: [...state.posts, action.payload],
+      };
     }
 
     default:

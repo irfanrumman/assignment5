@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ContactPage />} />
           <Route path="/add-contact" element={<AddNewPage />} />
+          <Route path="/add-new" element={<AddNewPage />} />
         </Routes>
       </ContactPageProvider>
     </>

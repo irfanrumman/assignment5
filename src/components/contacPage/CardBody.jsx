@@ -37,9 +37,9 @@ const CardBody = () => {
                 <td>Loading...</td>
               </tr>
             ) : (
-              contactPosts?.posts?.map((post) => (
+              contactPosts?.posts?.map((post, ind) => (
                 <tr key={post.id}>
-                  <td>{post.id}</td>
+                  <td>{ind + 1}</td>
                   <td>{post.fname}</td>
                   <td>{post.lname}</td>
                   <td>{post.email}</td>

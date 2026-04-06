@@ -1,39 +1,46 @@
 {
   "contactData": [
     {
-      "id": "1",
       "fname": "Irfan",
-      "lname": "uddin",
+      "lname": "Uddin",
       "email": "irfan@gmail.com",
-      "phone": "34556667"
+      "phone": "1248545142",
+      "id": "zTTnYstnePM"
     },
     {
-      "id": "2",
       "fname": "Rafi",
-      "lname": "Choudhury",
-      "email": "rafichowudhury@gmail.com",
-      "phone": "32166468"
+      "lname": "Chowdhury",
+      "email": "rafi@gmail.com",
+      "phone": "156764",
+      "id": "WJs4w_inSDQ"
     },
     {
-      "id": "3",
       "fname": "Hablu",
       "lname": "Khan",
-      "email": "hablu@gmail.com",
-      "phone": "524895663"
+      "email": "hablu",
+      "phone": "21654641",
+      "id": "BnnQqrX1QkY"
     },
     {
-      "id": "4",
-      "fname": "Kalu",
-      "lname": "Shaha",
-      "email": "kalu@gmail.com",
-      "phone": "0254958771"
+      "fname": "Shihab",
+      "lname": "Uddin",
+      "email": "shihab@gmail.com",
+      "phone": "596841110",
+      "id": "GLrgwln2Hjk"
     },
     {
-      "id": "5",
-      "fname": "Sakib",
-      "lname": "Saha",
-      "email": "jakhan@gmail.com",
-      "phone": "325418575"
+      "fname": "Nabil",
+      "lname": "Hasan",
+      "email": "nabil@gmail.com",
+      "phone": "16982645",
+      "id": "NfGrrXAaPAU"
+    },
+    {
+      "fname": "Skib",
+      "lname": "hasan",
+      "email": "sakib@gmail.com",
+      "phone": "2654564189",
+      "id": "WmXlgS2PIjg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
