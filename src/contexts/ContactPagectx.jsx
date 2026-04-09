@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import contactPageReducer from "../reducers/contacPageReducer";
 import initialData from "../utilities/contactData";
 import generateNextId from "../utilities/generateNextId";
@@ -7,18 +7,43 @@ export const Contactctx = createContext();
 
 const ContactPageProvider = ({ children }) => {
   const [contactPosts, dispatch] = useReducer(contactPageReducer, initialData);
+  const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch(`http://localhost:3000/contactData`);
+        const data = await res.json();
+        const searchData = searchItem
+          ? data.filter((item) => {
+              const search = searchItem.toLowerCase();
+              return (
+                item.fname.toLowerCase() === search ||
+                item.lname.toLowerCase() === search ||
+                item.email.toLowerCase() === search ||
+                item.phone.toLowerCase() === search
+              );
+            })
+          : data;
         if (!res.ok) {
           throw new Error("Sorry, failed to fetch data!");
         }
-        const data = await res.json();
+
+        if (searchItem.trim() && searchData.length == 0) {
+          dispatch({
+            type: "FETCH_DATA",
+            payload: [],
+          });
+          throw new Error("Ops! No Data Found");
+        }
+
         dispatch({
           type: "FETCH_DATA",
-          payload: data,
+          payload: searchData,
+        });
+        dispatch({
+          type: "SET_ERROR",
+          payload: { type: "fetchErr", message: null },
         });
       } catch (err) {
         dispatch({
@@ -28,9 +53,9 @@ const ContactPageProvider = ({ children }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [searchItem]);
 
-  const contactEditHandler = (postId) => {
+  const contactShowHandler = (postId) => {
     dispatch({
       type: "contactEditHandler",
       payload: postId,
@@ -65,11 +90,41 @@ const ContactPageProvider = ({ children }) => {
       return false;
     }
   };
-  const contactRemoveHandler = (post) => {
+  const deleteHandelr = async (postId) => {
+    const success = await contactRemoveHandler(postId);
+    if (success) {
+      dispatch({ type: "CLOSE_MODAL" });
+    }
+  };
+  const closeConfirmModal = () => {
+    dispatch({ type: "CLOSE_MODAL" });
+  };
+  const confirmModalHandler = (postId) => {
     dispatch({
-      type: "contactRemoveHandler",
-      payload: post,
+      type: "CONFIRM_MODAL",
+      payload: { type: "DELETE_COFIRM", id: postId },
     });
+  };
+  const contactRemoveHandler = async (postId) => {
+    try {
+      const res = await fetch(`http://localhost:3000/contactData/${postId}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error(`Sorry, It Couldn't Be Deleted!`);
+
+      dispatch({
+        type: "contactRemoveHandler",
+        payload: postId,
+      });
+      return true;
+    } catch (err) {
+      dispatch({
+        type: "SET_ERROR",
+        payload: { type: "deleteErr", message: err.message },
+      });
+      return false;
+    }
   };
 
   const contactSubmitHanler = async (post) => {
@@ -99,14 +154,24 @@ const ContactPageProvider = ({ children }) => {
       return false;
     }
   };
-
+  const filteringHandel = (postName) => {
+    dispatch({
+      type: "NAME_FILTERD",
+      payload: postName,
+    });
+  };
   const contactData = {
     contactPosts,
+    setSearchItem,
     dispatch,
-    contactEditHandler,
+    contactShowHandler,
     contactUpdateHandler,
+    deleteHandelr,
     contactRemoveHandler,
     contactSubmitHanler,
+    confirmModalHandler,
+    closeConfirmModal,
+    filteringHandel,
   };
   return (
     <Contactctx.Provider value={contactData}>{children}</Contactctx.Provider>

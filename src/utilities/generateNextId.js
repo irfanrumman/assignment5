@@ -1,8 +1,7 @@
-export default function generateNextId(contactData) {
-  const { posts } = contactData;
+export default function generateNextId(posts) {
   console.log(posts);
   const nextId = posts.reduce(
-    (nextId, postItem) => Math.max(Number(nextId), Number(postItem.id)),
+    (nextId, postItem) => Math.max(Number(nextId), Number(postItem.createdId)),
     0,
   );
 

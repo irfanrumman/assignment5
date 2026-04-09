@@ -1,11 +1,21 @@
 import React, { useContext, useState } from "react";
 import { Contactctx } from "../../contexts/ContactPagectx";
+import ConfirmBtn from "./ConfirmBtn";
 
 const UpdateModal = () => {
-  const { contactPosts, contactUpdateHandler } = useContext(Contactctx);
+  const {
+    contactPosts,
+    editAbleMode,
+    contactUpdateHandler,
+    deleteHandelr,
+    contactRemoveHandler,
+    confirmModalHandler,
+    dispatch,
+  } = useContext(Contactctx);
   const post = contactPosts?.editAbleMode;
 
   const intialData = {
+    id: post.id,
     fname: post.fname,
     lname: post.lname,
     email: post.email,
@@ -23,6 +33,13 @@ const UpdateModal = () => {
       setIsEditing(false);
     }
   };
+
+  const deleteBtnHandler = (postId) => {
+    console.log(postId);
+    confirmModalHandler(postId);
+    contactPosts.confirmModal.showModal == true;
+  };
+
   return (
     <>
       <div
@@ -179,11 +196,18 @@ const UpdateModal = () => {
                               Edit
                             </button>
                           )}
-                          <a href="#" className="btn btn-outline-danger">
+                          <button
+                            // onClick={() => deleteHandelr(post.id)}
+                            onClick={() => deleteBtnHandler(post.id)}
+                            className="btn btn-outline-danger"
+                          >
                             Delete
-                          </a>
+                          </button>
+                          {contactPosts.confirmModal.showModal && (
+                            <ConfirmBtn />
+                          )}
                           <a
-                            href="index.html"
+                            onClick={() => dispatch({ type: "CLOSE_MODAL" })}
                             className="btn btn-outline-secondary"
                           >
                             Cancel

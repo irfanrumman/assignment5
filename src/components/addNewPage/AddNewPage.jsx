@@ -1,14 +1,17 @@
 import { useContext, useState } from "react";
 import Navbar from "../contacPage/Navbar";
 import { Contactctx } from "../../contexts/ContactPagectx";
+import generateNextId from "../../utilities/generateNextId";
 
 const AddNewPage = () => {
   const { contactPosts, contactSubmitHanler } = useContext(Contactctx);
+
   const initalPost = {
     fname: "",
     lname: "",
     email: "",
     phone: "",
+    createdId: "",
   };
   const [post, setPost] = useState(initalPost);
 
@@ -23,9 +26,11 @@ const AddNewPage = () => {
   };
 
   const submitHandler = async (e, post) => {
-    // console.log(post);
     e.preventDefault();
-    await contactSubmitHanler(post);
+    // const creatNextId = await (new Date() + 1);
+    const nextPost = await { ...post, createdId: Date.now() + "" };
+    await contactSubmitHanler(nextPost);
+    console.log(nextPost);
     setPost(initalPost);
   };
 

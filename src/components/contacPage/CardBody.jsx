@@ -1,17 +1,33 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../../assets/css/CardBody.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Contactctx } from "../../contexts/ContactPagectx";
 import UpdateModal from "../modals/UpdateModal.jsx";
+import ConfirmBtn from "../modals/ConfirmBtn.jsx";
 
 const CardBody = () => {
   const {
     contactPosts,
-    contactEditHandler,
+    contactShowHandler,
+    confirmModalHandler,
     contactUpdateHandler,
+    deleteHandelr,
     contactRemoveHandler,
   } = useContext(Contactctx);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const deleteBtnHandler = (postId) => {
+    confirmModalHandler(postId);
+    contactPosts.confirmModal.showModal == true;
+  };
+
+  // const dataToShow =
+  //   contactPosts.filteredPosts?.length > 0
+  //     ? contactPosts.filteredPosts
+  //     : contactPosts.posts;
+
   return (
     <>
       <div className="card-body">
@@ -47,7 +63,7 @@ const CardBody = () => {
                   <td width="150">
                     <button
                       // href="show.html"
-                      onClick={() => contactEditHandler(post.id)}
+                      onClick={() => contactShowHandler(post.id)}
                       className="btn btn-sm btn-circle btn-outline-info"
                       title="Show"
                     >
@@ -55,19 +71,16 @@ const CardBody = () => {
                     </button>
 
                     <button
-                      // href="form.html"
-                      onClick={() => contactUpdateHandler(post)}
+                      onClick={() => contactShowHandler(post.id)}
                       className="btn btn-sm btn-circle btn-outline-secondary"
                       title="Edit"
                     >
                       <FontAwesomeIcon icon={faEdit} />
                     </button>
                     <button
-                      // href="#"
-                      onClick={() => contactRemoveHandler(post)}
+                      onClick={() => deleteBtnHandler(post.id)}
                       className="btn btn-sm btn-circle btn-outline-danger"
                       title="Delete"
-                      // onClick={() => "confirm('Are you sure?')"}
                     >
                       <FontAwesomeIcon icon={faTimes} />
                     </button>
@@ -78,6 +91,7 @@ const CardBody = () => {
           </tbody>
         </table>
         {contactPosts.editMode && contactPosts.editAbleMode && <UpdateModal />}
+        {contactPosts.confirmModal.showModal && <ConfirmBtn />}
       </div>
     </>
   );

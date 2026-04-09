@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "./Navbar";
 import InputSearch from "./InputSearch";
 import AddNewBtn from "./AddNewBtn";
