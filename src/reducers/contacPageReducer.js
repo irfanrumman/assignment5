@@ -3,9 +3,12 @@ import generateNextId from "../utilities/generateNextId";
 const contactPageReducer = (state, action) => {
   switch (action.type) {
     case "FETCH_DATA": {
+      const posts = action.payload.sort(
+        (a, b) => Number(b.createdId) - Number(a.createdId),
+      );
       return {
         ...state,
-        posts: [...action.payload],
+        posts: [...posts],
         isLoading: false,
       };
     }
@@ -67,7 +70,7 @@ const contactPageReducer = (state, action) => {
     case "SUBMIT_HANDLER": {
       return {
         ...state,
-        posts: [...state.posts, action.payload],
+        posts: [action.payload, ...state.posts],
       };
     }
 
@@ -89,7 +92,7 @@ const contactPageReducer = (state, action) => {
       const sorted = [...state.posts];
 
       if (filterType === "latest") {
-        sorted.sort((a, b) => b.createdId - a.createdId);
+        sorted.sort((a, b) => Number(b.createdId) - Number(a.createdId));
       }
       if (filterType === "fname") {
         sorted.sort((a, b) => a.fname.localeCompare(b.fname));
@@ -99,7 +102,7 @@ const contactPageReducer = (state, action) => {
       }
 
       if (filterType === "oldest") {
-        sorted.sort((a, b) => a.createdId - b.createdId);
+        sorted.sort((a, b) => Number(a.createdId) - Number(b.createdId));
       }
       return {
         ...state,

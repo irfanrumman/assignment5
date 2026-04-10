@@ -2,9 +2,12 @@ import { useContext, useState } from "react";
 import Navbar from "../contacPage/Navbar";
 import { Contactctx } from "../../contexts/ContactPagectx";
 import generateNextId from "../../utilities/generateNextId";
+import { useNavigate } from "react-router";
 
 const AddNewPage = () => {
-  const { contactPosts, contactSubmitHanler } = useContext(Contactctx);
+  const navigate = useNavigate();
+  const { contactPosts, contactSubmitHanler, dispatch } =
+    useContext(Contactctx);
 
   const initalPost = {
     fname: "",
@@ -27,8 +30,15 @@ const AddNewPage = () => {
 
   const submitHandler = async (e, post) => {
     e.preventDefault();
-    // const creatNextId = await (new Date() + 1);
-    const nextPost = await { ...post, createdId: Date.now() + "" };
+    if (
+      !post.fname.trim() ||
+      !post.lname.trim() ||
+      !post.email.trim() ||
+      !post.phone.trim()
+    ) {
+      return alert(`Please, Write in your input field`);
+    }
+    const nextPost = { ...post, createdId: Date.now() + "" };
     await contactSubmitHanler(nextPost);
     console.log(nextPost);
     setPost(initalPost);
@@ -128,12 +138,13 @@ const AddNewPage = () => {
                             <button type="submit" className="btn btn-primary">
                               Save
                             </button>
-                            <a
-                              href="index.html"
+                            <button
+                              type="button"
+                              onClick={() => navigate("/")}
                               className="btn btn-outline-secondary"
                             >
                               Cancel
-                            </a>
+                            </button>
                           </div>
                         </div>
                       </div>

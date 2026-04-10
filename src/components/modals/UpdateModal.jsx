@@ -197,7 +197,6 @@ const UpdateModal = () => {
                             </button>
                           )}
                           <button
-                            // onClick={() => deleteHandelr(post.id)}
                             onClick={() => deleteBtnHandler(post.id)}
                             className="btn btn-outline-danger"
                           >
@@ -206,12 +205,12 @@ const UpdateModal = () => {
                           {contactPosts.confirmModal.showModal && (
                             <ConfirmBtn />
                           )}
-                          <a
+                          <button
                             onClick={() => dispatch({ type: "CLOSE_MODAL" })}
                             className="btn btn-outline-secondary"
                           >
                             Cancel
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>

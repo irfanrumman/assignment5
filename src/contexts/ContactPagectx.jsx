@@ -14,6 +14,7 @@ const ContactPageProvider = ({ children }) => {
       try {
         const res = await fetch(`http://localhost:3000/contactData`);
         const data = await res.json();
+
         const searchData = searchItem
           ? data.filter((item) => {
               const search = searchItem.toLowerCase();
@@ -140,6 +141,10 @@ const ContactPageProvider = ({ children }) => {
       }
 
       const newPost = await res.json();
+
+      if (newPost) {
+        alert(`Succsessfully Added!`);
+      }
 
       dispatch({
         type: "SUBMIT_HANDLER",

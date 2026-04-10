@@ -22,11 +22,10 @@ const CardBody = () => {
     confirmModalHandler(postId);
     contactPosts.confirmModal.showModal == true;
   };
-
-  // const dataToShow =
-  //   contactPosts.filteredPosts?.length > 0
-  //     ? contactPosts.filteredPosts
-  //     : contactPosts.posts;
+  const dataPosts =
+    contactPosts.filteredPosts?.length > 0
+      ? contactPosts.filteredPosts
+      : contactPosts.posts;
 
   return (
     <>
@@ -53,7 +52,7 @@ const CardBody = () => {
                 <td>Loading...</td>
               </tr>
             ) : (
-              contactPosts?.posts?.map((post, ind) => (
+              dataPosts?.map((post, ind) => (
                 <tr key={post.id}>
                   <td>{ind + 1}</td>
                   <td>{post.fname}</td>

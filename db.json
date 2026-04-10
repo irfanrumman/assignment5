@@ -20,7 +20,7 @@
       "fname": "Shihab",
       "lname": "Uddin",
       "email": "shihab@gmail.com",
-      "phone": "32148551",
+      "phone": "321",
       "createdId": "1775750035803",
       "id": "u_NOBeFnxjo"
     },
@@ -39,14 +39,6 @@
       "phone": "32148585",
       "createdId": "1775750085251",
       "id": "_fj3pjYBufc"
-    },
-    {
-      "fname": "Hablu",
-      "lname": "Khan",
-      "email": "hablu@gmail.com",
-      "phone": "32118585",
-      "createdId": "1775750119718",
-      "id": "r_ELekdRhzE"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

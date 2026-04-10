@@ -17,14 +17,6 @@ const Navbar = () => {
             >
               Contact List
             </NavLink>
-            <NavLink
-              to="/add-contact"
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "text-success" : ""
-              }
-            >
-              Add New
-            </NavLink>
           </div>
         </div>
       </nav>
