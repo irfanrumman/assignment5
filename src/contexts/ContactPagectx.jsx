@@ -12,7 +12,8 @@ const ContactPageProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/contactData`);
+        const url = `https://69d9223b0576c938825a9315.mockapi.io/contactData`;
+        const res = await fetch(url);
         const data = await res.json();
 
         const searchData = searchItem
@@ -65,11 +66,14 @@ const ContactPageProvider = ({ children }) => {
   const contactUpdateHandler = async (e, postId, formData) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:3000/contactData/${postId}`, {
-        method: "PATCH",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `https://69d9223b0576c938825a9315.mockapi.io/contactData/${postId}`,
+        {
+          method: "PUT",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
 
       if (!res.ok) {
         throw new Error(`Sorry, Failed to Update!`);
@@ -108,9 +112,12 @@ const ContactPageProvider = ({ children }) => {
   };
   const contactRemoveHandler = async (postId) => {
     try {
-      const res = await fetch(`http://localhost:3000/contactData/${postId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://69d9223b0576c938825a9315.mockapi.io/contactData/${postId}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       if (!res.ok) throw new Error(`Sorry, It Couldn't Be Deleted!`);
 
@@ -130,11 +137,14 @@ const ContactPageProvider = ({ children }) => {
 
   const contactSubmitHanler = async (post) => {
     try {
-      const res = await fetch(`http://localhost:3000/contactData`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(post),
-      });
+      const res = await fetch(
+        `https://69d9223b0576c938825a9315.mockapi.io/contactData`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(post),
+        },
+      );
 
       if (!res.ok) {
         throw new Error(`Sorry, Something is wrong!`);

@@ -40,7 +40,6 @@ const AddNewPage = () => {
     }
     const nextPost = { ...post, createdId: Date.now() + "" };
     await contactSubmitHanler(nextPost);
-    console.log(nextPost);
     setPost(initalPost);
   };
 
